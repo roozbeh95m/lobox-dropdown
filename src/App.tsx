@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropDownInput from "./components/DropDownInput";
 import DropDownList from "./components/DropDownList";
+import useKeyDown from "./hooks/useKeyDown";
 import Layout from "./layout";
 
 const App = () => {
@@ -15,7 +16,9 @@ const App = () => {
   const onTextChange = (text: string) => {
     setTextTemp(text);
   };
-  let items = [
+  const enterPressed = useKeyDown("Enter");
+
+  let itemsList = [
     "book",
     "apple is good",
     "text me",
@@ -27,7 +30,16 @@ const App = () => {
     "hide in the dark",
     "trun left to",
   ];
-  
+  const [items, setItems] = useState(itemsList);
+  useEffect(() => {
+    if (enterPressed === true && textTemp.length) {
+      if (items.indexOf(textTemp) === -1) {
+        setItems([...items, textTemp]);
+      } else {
+        alert("item already exist");
+      }
+    }
+  }, [enterPressed]);
   return (
     <Layout>
       <DropDownInput
