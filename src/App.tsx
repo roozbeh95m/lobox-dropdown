@@ -1,9 +1,18 @@
-function App() {
+import { useState } from "react";
+import DropDownInput from "./components/DropDown";
+import Layout from "./layout";
+
+const App = () => {
+  const [show, setShow] = useState(false);
+  const onShowIconPress = () => {
+    setShow(!show);
+  };
+
   return (
-    <div className="App">
-      lobox project
-    </div>
+    <Layout>
+      <DropDownInput show={show} onClick={onShowIconPress} />
+    </Layout>
   );
-}
+};
 
 export default App;
