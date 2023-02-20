@@ -4,6 +4,7 @@ import { createUseStyles } from "react-jss";
 type Props = {
   show: boolean;
   items: string[];
+  onItemClick: (arg0: string) => void;
 };
 const useStyles = createUseStyles({
   dropDownListLayout: {
@@ -11,7 +12,7 @@ const useStyles = createUseStyles({
     backgroundColor: "#FFFF",
     display: "flex",
     flexDirection: "column",
-    padding: 10,
+    padding: "10px",
     marginTop: 5,
     borderRadius: 5,
     border: "1px solid lightGray",
@@ -19,19 +20,29 @@ const useStyles = createUseStyles({
     overflow: "scroll",
   },
   item: {
-    padding: "10px 0px",
+    padding: "10px 3px",
+    color:"gray",
+    "&:hover": {
+      background: "lightblue",
+      color: "blue",
+      borderRadius: 5,
+    },
   },
 });
 const DropDownList = (props: Props) => {
   const classes = useStyles();
-  const { show, items } = props;
-  
+  const { show, items, onItemClick } = props;
+
   if (show) {
     return (
       <div className={classes.dropDownListLayout}>
         {items.map((item, index) => {
           return (
-            <div key={index} className={classes.item}>
+            <div
+              key={index}
+              className={classes.item}
+              onClick={() => onItemClick(item)}
+            >
               {item}
             </div>
           );

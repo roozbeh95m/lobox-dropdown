@@ -3,6 +3,7 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
 interface Props {
   show: boolean;
+  textTemp: string;
   onShowClick: () => void;
   onHideClick: () => void;
   onTextChange: (arg0: string) => void;
@@ -16,6 +17,10 @@ const useStyles = createUseStyles({
     border: "1px solid lightGray",
     borderRadius: "5px",
     width: "200px",
+    color: "gray",
+    fontFamily:"'Josefin Sans', cursive;",
+    fontSize:16,
+    fontWeight:400
   },
   iconHolder: {
     position: "absolute",
@@ -30,22 +35,23 @@ const useStyles = createUseStyles({
 });
 const DropDownInput = (props: Props) => {
   const classes = useStyles();
-  const { show, onShowClick, onHideClick, onTextChange } = props;
-  const [search, setSearch] = useState("");
+  const { show, onShowClick, onHideClick, onTextChange, textTemp } = props;
+  const [text, setText] = useState(textTemp);
   useEffect(() => {
-    if (search.length) {
-      onTextChange(search);
+    onTextChange(text);
+    if (text.length) {
       onShowClick();
     } else {
       onHideClick();
     }
-  }, [search]);
+  }, [text]);
 
   return (
     <div className={classes.dropDownInputLayout}>
       <input
+        value={textTemp}
         className={classes.input}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setText(e.target.value)}
       />
       <div className={classes.iconHolder}>
         {show ? (

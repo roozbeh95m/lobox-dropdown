@@ -16,8 +16,10 @@ const App = () => {
   const onTextChange = (text: string) => {
     setTextTemp(text);
   };
+  const onItemClick = (text: string) => {
+    setTextTemp(text);
+  };
   const enterPressed = useKeyDown("Enter");
-
   let itemsList = [
     "book",
     "apple is good",
@@ -35,20 +37,27 @@ const App = () => {
     if (enterPressed === true && textTemp.length) {
       if (items.indexOf(textTemp) === -1) {
         setItems([...items, textTemp]);
+        setTextTemp("");
       } else {
         alert("item already exist");
       }
     }
   }, [enterPressed]);
+
   return (
     <Layout>
       <DropDownInput
         show={show}
         onShowClick={onShowIconPress}
         onHideClick={onHideIconPress}
+        textTemp={textTemp}
         onTextChange={(text: string) => onTextChange(text)}
       />
-      <DropDownList show={show} items={items} />
+      <DropDownList
+        show={show}
+        items={items}
+        onItemClick={(text: string) => onTextChange(text)}
+      />
     </Layout>
   );
 };
