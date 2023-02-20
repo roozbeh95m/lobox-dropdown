@@ -19,6 +19,7 @@ const App = () => {
   };
   const onItemClick = (text: string) => {
     setTextTemp(text);
+    onHideIconPress()
   };
   const enterPressed = useKeyDown("Enter");
   let itemsList = [
@@ -58,7 +59,7 @@ const App = () => {
       <DropDownList
         show={show}
         items={items}
-        onItemClick={(text: string) => onTextChange(text)}
+        onItemClick={(text: string) => onItemClick(text)}
       />
     </Layout>
   );
