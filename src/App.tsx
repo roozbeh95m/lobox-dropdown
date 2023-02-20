@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Description from "./components/Description";
 import DropDownInput from "./components/DropDownInput";
 import DropDownList from "./components/DropDownList";
 import useKeyDown from "./hooks/useKeyDown";
@@ -46,6 +47,7 @@ const App = () => {
 
   return (
     <Layout>
+      <Description/>
       <DropDownInput
         show={show}
         onShowClick={onShowIconPress}
